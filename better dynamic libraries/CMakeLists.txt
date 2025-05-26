@@ -17,6 +17,6 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 add_library(BetterDynamicLibraries INTERFACE)
 target_include_directories(BetterDynamicLibraries INTERFACE
-    $<BUILD_INTERFACE:"${CMAKE_CURRENT_SOURCE_DIR}/../include">
+    $<BUILD_INTERFACE:"${CMAKE_CURRENT_SOURCE_DIR}/include">
     $<INSTALL_INTERFACE:include>
 )
