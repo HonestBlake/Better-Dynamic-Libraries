@@ -11,19 +11,10 @@ inline namespace worTech{
     // #namespace: betterDynamicLibraries, project namespace
     namespace betterDynamicLibraries{
 
-        // #namespace: debugging, inline module namespace
-        inline namespace debugging{
-            namespace errorMessages{}
-            namespace error = errorMessages; // alias errorMessages to error
-            namespace debugTools{}
-            namespace debug = debugTools; // alias debugTools to debug
-            namespace loggerValues{}
-            namespace logger = loggerValues; // alias loggerValues to logger
-            class BetterDynamicLibraryDebug;
-        } // #end: debugging
-
         // #namespace: dynamicLibraries, inline module namespace
         inline namespace dynamicLibraries{
+            namespace errorMessages{}
+            namespace error = errorMessages; // alias errorMessages to error
             class DynamicLibrary;
         } // #end: dynamicLibraries
 
@@ -32,3 +23,5 @@ inline namespace worTech{
     namespace btr = betterDynamicLibraries; // alias betterDynamicLibraries to btr
     
 } // #end: worTech
+
+#define WT_ODR_IGNORE inline

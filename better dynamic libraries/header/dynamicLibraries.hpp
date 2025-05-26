@@ -12,31 +12,42 @@
 
 namespace worTech::betterDynamicLibraries::dynamicLibraries{
 
+    // #namespace: errorMessages(error), variable namespace
+    namespace errorMessages{
+        inline const std::string CANNOT_GET_FUNC_WHEN_NOT_LOADED = "Cannot get function when library is not loaded.";
+        inline const std::string FAILED_TO_LOAD_LIBRARY = "Failed to load library: {}";
+        inline const std::string FAILED_TO_GET_FUNC = "Failed to get function: {} from library: {}";
+    
+    } // #end: errorMessages
+
     // #class: DynamicLibrary, final class object
     class DynamicLibrary final{
     public:
     // public factory methods
-        inline DynamicLibrary(const std::string& p_file)noexcept;
-        inline DynamicLibrary()noexcept = default; // #default: DynamicLibrary(), default noexcept constructor
-        inline DynamicLibrary(const DynamicLibrary&)noexcept = default; // #default: DynamicLibrary(const DynamicLibrary&), default noexcept constructor
-        inline DynamicLibrary(DynamicLibrary&&)noexcept = default; // #default: DynamicLibrary(DynamicLibrary&&), default noexcept constructor
-        inline ~DynamicLibrary()noexcept;
+        WT_ODR_IGNORE DynamicLibrary(const std::string& p_file)noexcept;
+        WT_ODR_IGNORE DynamicLibrary()noexcept = default; // #default: DynamicLibrary(), default noexcept constructor
+        WT_ODR_IGNORE DynamicLibrary(const DynamicLibrary&)noexcept = default; // #default: DynamicLibrary(const DynamicLibrary&), default noexcept constructor
+        WT_ODR_IGNORE DynamicLibrary(DynamicLibrary&&)noexcept = default; // #default: DynamicLibrary(DynamicLibrary&&), default noexcept constructor
+        WT_ODR_IGNORE ~DynamicLibrary()noexcept;
     // public operators
-        inline DynamicLibrary& operator=(const DynamicLibrary&)noexcept = default; // #default: operator=(const DynamicLibrary&), default noexcept operator
-        inline DynamicLibrary& operator=(DynamicLibrary&&)noexcept = default; // #default: operator=(DynamicLibrary&&), default noexcept operator
-        inline explicit operator bool()const;
+        WT_ODR_IGNORE DynamicLibrary& operator=(const DynamicLibrary&)noexcept = default; // #default: operator=(const DynamicLibrary&), default noexcept operator
+        WT_ODR_IGNORE DynamicLibrary& operator=(DynamicLibrary&&)noexcept = default; // #default: operator=(DynamicLibrary&&), default noexcept operator
+        WT_ODR_IGNORE explicit operator bool()const;
     // public static methods
-        inline static DynamicLibrary load(const std::string& p_file);
-        inline static DynamicLibrary load(const std::filesystem::path& p_file);
-        inline void error();
+        [[nodiscard]] WT_ODR_IGNORE static DynamicLibrary load(const char* p_file);
+        [[nodiscard]] WT_ODR_IGNORE static DynamicLibrary load(const std::string& p_file);
+        [[nodiscard]] WT_ODR_IGNORE static DynamicLibrary load(const std::filesystem::path& p_file);
+        WT_ODR_IGNORE void error();
     // public methods
-        inline void loadLibrary(const std::string& p_file);
-        inline void loadLibrary(const std::filesystem::path& p_file);
-        inline void freeLibrary();
-        inline bool loaded()const;
-        template<typename T_function> inline std::function<T_function> getFunction(const std::string& p_functionName)const;
+        WT_ODR_IGNORE void loadLibrary(const std::string& p_file);
+        WT_ODR_IGNORE void loadLibrary(const std::filesystem::path& p_file);
+        WT_ODR_IGNORE void freeLibrary();
+        WT_ODR_IGNORE bool loaded()const;
+        WT_ODR_IGNORE std::string name()const;
+        template<typename T_function> std::expected<std::function<T_function>, std::string> getFunction(const std::string& p_functionName)const;
     private:
     // private members
+        std::string m_name;
         void* m_handle;
         bool m_loaded;
     }; // #end: DynamicLibrary

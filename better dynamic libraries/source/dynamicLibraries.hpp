@@ -26,22 +26,32 @@ namespace worTech::betterDynamicLibraries::dynamicLibraries{
     // #func: operator=(const DynamicLibrary&), const operator
     // #return: bool, if the library is loaded
     DynamicLibrary::operator bool()const{
-        return m_loaded;
+        return loaded();
     } // #end: operator=(const DynamicLibrary&)
 
 // #div: public static methods
 
+    // #func: load(const char*), method
+    // #param: const char* p_file, library file path
+    // #return: DynamicLibrary, created dynamic library object
+    // #attribute: nodiscard, function result should not be ignored
+    [[nodiscard]] DynamicLibrary DynamicLibrary::load(const char* p_file){
+        return DynamicLibrary(std::string(p_file));
+    } // #end: load(const char*)
+
     // #func: load(const std::string&), method
     // #param: const std::string& p_file, library file path
     // #return: DynamicLibrary, created dynamic library object
-    DynamicLibrary DynamicLibrary::load(const std::string& p_file){
+    // #attribute: nodiscard, function result should not be ignored
+    [[nodiscard]] DynamicLibrary DynamicLibrary::load(const std::string& p_file){
         return DynamicLibrary(p_file);
     }
 
     // #func: load(const std::filesystem::path&), method
     // #param: const std::filesystem::path& p_file, library file path
     // #return: DynamicLibrary, created dynamic library object
-    DynamicLibrary DynamicLibrary::load(const std::filesystem::path& p_file){
+    // #attribute: nodiscard, function result should not be ignored
+    [[nodiscard]] DynamicLibrary DynamicLibrary::load(const std::filesystem::path& p_file){
         return DynamicLibrary(p_file.string());
     } // #end: load(const std::filesystem::path&)
 
@@ -61,7 +71,7 @@ namespace worTech::betterDynamicLibraries::dynamicLibraries{
     // #func: loadLibrary(const std::filesystem::path&), method
     // #param: const std::filesystem::path& p_file, library file path
     void DynamicLibrary::loadLibrary(const std::filesystem::path& p_file){
-        load(p_file.string());
+        loadLibrary(p_file.string());
     } // #end: loadLibrary(const std::filesystem::path&)
 
     // #func: freeLibrary(), method
@@ -80,20 +90,30 @@ namespace worTech::betterDynamicLibraries::dynamicLibraries{
     // #return: bool, if the library is loaded
     bool DynamicLibrary::loaded()const{
         return m_loaded;
-    }
+    } // #end: loaded()
+
+    // #func: name(), const method
+    // #return: std::string, library name
+    std::string DynamicLibrary::name()const{
+        return m_name;
+    } // #end: name()
 
     // #func: getFunction(const std::string&), template const method
     // #template: typename T_function, function type to retrieve
     // #param: const std::string& p_functionName, function name to retrieve
     // #return: std::function<T_function>, retrieved function pointer
-    template<typename T_function> std::function<T_function> DynamicLibrary::getFunction(const std::string& p_functionName)const{
+    template<typename T_function> std::expected<std::function<T_function>, std::string> DynamicLibrary::getFunction(const std::string& p_functionName)const{
         if(!m_loaded){
-            // TODO error call
+            return std::unexpected(error::CANNOT_GET_FUNC_WHEN_NOT_LOADED);
         }
         #ifdef _WIN32
-            return std::function<T_function>(reinterpret_cast<T_function*>(GetProcAddress(static_cast<HMODULE>(m_handle), p_functionName.c_str())));
+            T_function* function = reinterpret_cast<T_function*>(GetProcAddress(static_cast<HMODULE>(m_handle), p_functionName.c_str()));
+            if(!function) return std::unexpected(std::vformat(error::FAILED_TO_GET_FUNC, std::make_format_args(p_functionName, m_name)));
+            return std::function<T_function>(function);
         #else
-            return reinterpret_cast<T_function>(dlsym(m_handle, p_functionName.c_str()));
+            T_function* function = reinterpret_cast<T_function*>(dlsym(m_handle, p_functionName.c_str()));
+            if(!function) return std::unexpected(std::format(error::FAILED_TO_GET_FUNC, p_functionName, m_name));
+            return std::function<T_function>(function);
         #endif
     } // #end: getFunction(const std::string&)
 
