@@ -18,6 +18,5 @@ set(ROOT_DIR "${CMAKE_CURRENT_SOURCE_DIR}/..")
 
 add_library(BetterDynamicLibraries INTERFACE)
 target_include_directories(BetterDynamicLibraries INTERFACE
-    $<BUILD_INTERFACE:"${ROOT_DIR}/include">
-    $<INSTALL_INTERFACE:include>
+    "${ROOT_DIR}/include"
 )
