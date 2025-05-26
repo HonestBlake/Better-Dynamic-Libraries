@@ -9,7 +9,7 @@
 inline namespace worTech{
 
     // #namespace: betterDynamicLibraries, project namespace
-    namespace betterDynamicLibraries{
+    namespace btr{
 
         // #namespace: dynamicLibraries, inline module namespace
         inline namespace dynamicLibraries{
@@ -19,8 +19,6 @@ inline namespace worTech{
         } // #end: dynamicLibraries
 
     } // #end: betterDynamicLibraries
-    namespace better = betterDynamicLibraries; // alias betterDynamicLibraries to better
-    namespace btr = betterDynamicLibraries; // alias betterDynamicLibraries to btr
     
 } // #end: worTech
 

@@ -4,7 +4,7 @@
 
 #include "../header/dynamicLibraries.hpp" // Module header file
 
-namespace worTech::betterDynamicLibraries::dynamicLibraries{
+namespace worTech::btr::dynamicLibraries{
 
 // #from: DynamicLibrary, method definitions
 

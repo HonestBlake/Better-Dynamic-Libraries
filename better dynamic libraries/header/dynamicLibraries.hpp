@@ -10,7 +10,7 @@
     #include <dlfcn.h>
 #endif
 
-namespace worTech::betterDynamicLibraries::dynamicLibraries{
+namespace worTech::btr::dynamicLibraries{
 
     // #namespace: errorMessages(error), variable namespace
     namespace errorMessages{
