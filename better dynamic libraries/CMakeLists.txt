@@ -14,9 +14,10 @@ set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
+set(ROOT_DIR "${CMAKE_CURRENT_SOURCE_DIR}/..")
 
 add_library(BetterDynamicLibraries INTERFACE)
 target_include_directories(BetterDynamicLibraries INTERFACE
-    $<BUILD_INTERFACE:"${CMAKE_CURRENT_SOURCE_DIR}/include">
+    $<BUILD_INTERFACE:"${ROOT_DIR}/include">
     $<INSTALL_INTERFACE:include>
 )
