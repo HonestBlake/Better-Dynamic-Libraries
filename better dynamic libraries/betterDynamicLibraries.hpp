@@ -1,15 +1,15 @@
 // #file: betterDynamicLibraries.hpp, project header file
 
-#include "header/standardLibraries.hpp" // Project wide standard libraries
-#include "header/externalLibraries.hpp" // Project wide external libraries
+#include "standardLibraries.hpp" // Project wide standard libraries
+#include "externalLibraries.hpp" // Project wide external libraries
 
 #pragma once
 
 // #namespace: worTech, inline developer namespace
 inline namespace worTech{
 
-    // #namespace: betterDynamicLibraries, project namespace
-    namespace btr{
+    // #namespace: betterCpp, project namespace
+    namespace betterCpp{
 
         // #namespace: dynamicLibraries, inline module namespace
         inline namespace dynamicLibraries{
@@ -18,8 +18,11 @@ inline namespace worTech{
             class DynamicLibrary;
         } // #end: dynamicLibraries
 
-    } // #end: betterDynamicLibraries
+    } // #end: betterCpp
+    namespace better = betterCpp; // alias betterCpp to better
+    namespace btr = betterCpp; // alias betterCpp to btr
     
 } // #end: worTech
+namespace wt = worTech; // alias worTech to wt
 
 #define WT_ODR_IGNORE inline

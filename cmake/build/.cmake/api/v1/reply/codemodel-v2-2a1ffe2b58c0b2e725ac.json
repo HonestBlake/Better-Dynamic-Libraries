@@ -12,7 +12,11 @@
 						"string" : "3.31"
 					},
 					"projectIndex" : 0,
-					"source" : "."
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0
+					]
 				}
 			],
 			"name" : "Debug",
@@ -23,10 +27,23 @@
 					[
 						0
 					],
-					"name" : "Better Dynamic Libraries"
+					"name" : "Better Dynamic Libraries",
+					"targetIndexes" : 
+					[
+						0
+					]
 				}
 			],
-			"targets" : []
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "BetterDynamicLibraries::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-BetterDynamicLibraries-Debug-e1ec5cf5371c7ff505e8.json",
+					"name" : "BetterDynamicLibraries",
+					"projectIndex" : 0
+				}
+			]
 		}
 	],
 	"kind" : "codemodel",

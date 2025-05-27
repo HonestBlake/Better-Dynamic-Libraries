@@ -1,8 +1,8 @@
-// #file: header/dynamicLibraries.hpp, module header file
+// #file: dynamicLibraries.hpp, module header file
 
 #pragma once
 
-#include "../betterDynamicLibraries.hpp" // Project header file
+#include "betterDynamicLibraries.hpp" // Project header file
 // Conditionally include platform-specific dll header
 #ifdef _WIN32
     #include <libloaderapi.h> 
@@ -10,14 +10,13 @@
     #include <dlfcn.h>
 #endif
 
-namespace worTech::btr::dynamicLibraries{
+namespace worTech::betterCpp::dynamicLibraries{
 
     // #namespace: errorMessages(error), variable namespace
     namespace errorMessages{
         inline const std::string CANNOT_GET_FUNC_WHEN_NOT_LOADED = "Cannot get function when library is not loaded.";
         inline const std::string FAILED_TO_LOAD_LIBRARY = "Failed to load library: {}";
         inline const std::string FAILED_TO_GET_FUNC = "Failed to get function: {} from library: {}";
-    
     } // #end: errorMessages
 
     // #class: DynamicLibrary, final class object
@@ -54,4 +53,4 @@ namespace worTech::btr::dynamicLibraries{
 
 } // namespace worTech::betterDynamicLibraries::dynamicLibraries
 
-#include "../source/dynamicLibraries.hpp" // Module source file
+#include "dynamicLibraries.tpp" // Module source file
