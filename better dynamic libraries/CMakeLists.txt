@@ -29,5 +29,9 @@ set_target_properties(BetterDynamicLibraries PROPERTIES
     OUTPUT_NAME "dynamicLibraries"
     PREFIX ""
     SUFFIX ".lib"
-    ARCHIVE_OUTPUT_DIRECTORY "${ROOT_DIR}/binary"
 )
+if(CMAKE_SOURCE_DIR STREQUAL PROJECT_SOURCE_DIR) # Only set this if the project is built locally
+    set_target_properties(BetterDynamicLibraries PROPERTIES
+        ARCHIVE_OUTPUT_DIRECTORY "${ROOT_DIR}/binary"
+    )
+endif()
