@@ -23,26 +23,26 @@ namespace worTech::betterCpp::dynamicLibraries{
     class DynamicLibrary final{
     public:
     // public factory methods
-        WT_ODR_IGNORE DynamicLibrary(const std::string& p_file)noexcept;
-        WT_ODR_IGNORE DynamicLibrary()noexcept = default; // #default: DynamicLibrary(), default noexcept constructor
-        WT_ODR_IGNORE DynamicLibrary(const DynamicLibrary&)noexcept = default; // #default: DynamicLibrary(const DynamicLibrary&), default noexcept constructor
-        WT_ODR_IGNORE DynamicLibrary(DynamicLibrary&&)noexcept = default; // #default: DynamicLibrary(DynamicLibrary&&), default noexcept constructor
-        WT_ODR_IGNORE ~DynamicLibrary()noexcept;
+        DynamicLibrary(const std::string& p_file)noexcept;
+        DynamicLibrary()noexcept = default; // #default: DynamicLibrary(), default noexcept constructor
+        DynamicLibrary(const DynamicLibrary&)noexcept = default; // #default: DynamicLibrary(const DynamicLibrary&), default noexcept constructor
+        DynamicLibrary(DynamicLibrary&&)noexcept = default; // #default: DynamicLibrary(DynamicLibrary&&), default noexcept constructor
+        ~DynamicLibrary()noexcept;
     // public operators
-        WT_ODR_IGNORE DynamicLibrary& operator=(const DynamicLibrary&)noexcept = default; // #default: operator=(const DynamicLibrary&), default noexcept operator
-        WT_ODR_IGNORE DynamicLibrary& operator=(DynamicLibrary&&)noexcept = default; // #default: operator=(DynamicLibrary&&), default noexcept operator
-        WT_ODR_IGNORE explicit operator bool()const;
+        DynamicLibrary& operator=(const DynamicLibrary&)noexcept = default; // #default: operator=(const DynamicLibrary&), default noexcept operator
+        DynamicLibrary& operator=(DynamicLibrary&&)noexcept = default; // #default: operator=(DynamicLibrary&&), default noexcept operator
+        explicit operator bool()const;
     // public static methods
-        [[nodiscard]] WT_ODR_IGNORE static DynamicLibrary load(const char* p_file);
-        [[nodiscard]] WT_ODR_IGNORE static DynamicLibrary load(const std::string& p_file);
-        [[nodiscard]] WT_ODR_IGNORE static DynamicLibrary load(const std::filesystem::path& p_file);
-        WT_ODR_IGNORE void error();
+        [[nodiscard]] static DynamicLibrary load(const char* p_file);
+        [[nodiscard]] static DynamicLibrary load(const std::string& p_file);
+        [[nodiscard]] static DynamicLibrary load(const std::filesystem::path& p_file);
+        void error();
     // public methods
-        WT_ODR_IGNORE void loadLibrary(const std::string& p_file);
-        WT_ODR_IGNORE void loadLibrary(const std::filesystem::path& p_file);
-        WT_ODR_IGNORE void freeLibrary();
-        WT_ODR_IGNORE bool loaded()const;
-        WT_ODR_IGNORE std::string name()const;
+        void loadLibrary(const std::string& p_file);
+        void loadLibrary(const std::filesystem::path& p_file);
+        void freeLibrary();
+        bool loaded()const;
+        std::string name()const;
         template<typename T_function> std::expected<std::function<T_function>, std::string> getFunction(const std::string& p_functionName)const;
     private:
     // private members
